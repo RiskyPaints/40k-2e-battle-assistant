@@ -1,69 +1,368 @@
+/* =========================================
+   WARHAMMER 40,000 — SECOND EDITION
+   Battle Assistant
+   ========================================= */
+
+
+/* -----------------------------------------
+   COLOUR PALETTE
+   ----------------------------------------- */
+
+:root {
+    --chaos-black: #1a1a1a;
+    --deep-black: #0d0d0d;
+
+    --goblin-green: #3a913f;
+    --snot-green: #007337;
+
+    --blood-red: #e41f26;
+    --dark-red: #8f171b;
+
+    --sunburst-yellow: #fad814;
+    --bad-moon-yellow: #ffff00;
+
+    --ultramarine-blue: #184f9b;
+    --enchanted-blue: #007eb9;
+
+    --skull-white: #ffffff;
+    --bleached-bone: #e1d4b6;
+    --codex-grey: #7d838a;
+
+    --snakebite-brown: #9c6d33;
+
+    --gold: #d9a514;
+
+    --paper: #ded4b9;
+    --paper-dark: #b9ad91;
+
+    --ink: #171717;
+}
+
+
+/* -----------------------------------------
+   BASIC RESET
+   ----------------------------------------- */
+
 * {
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
     margin: 0;
-    background: #1b1b1b;
-    color: #e5e1d8;
-    font-family: Arial, sans-serif;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            #292929 0%,
+            var(--chaos-black) 45%,
+            var(--deep-black) 100%
+        );
+
+    color: var(--bleached-bone);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
 }
+
+
+/* -----------------------------------------
+   MAIN APP
+   ----------------------------------------- */
 
 .app {
-    max-width: 900px;
+    width: min(100% - 32px, 1000px);
     margin: 0 auto;
-    padding: 30px;
+    padding: 40px 0 60px;
 }
 
+
+/* -----------------------------------------
+   HEADER
+   ----------------------------------------- */
+
 header {
+    position: relative;
+
     text-align: center;
-    border-bottom: 2px solid #777;
-    padding-bottom: 25px;
+
+    padding: 28px 20px 24px;
     margin-bottom: 30px;
+
+    background: var(--chaos-black);
+
+    border: 4px solid var(--sunburst-yellow);
+
+    box-shadow:
+        0 0 0 4px var(--ink),
+        0 8px 0 var(--deep-black);
 }
+
+
+/* Yellow decorative strip */
+
+header::before,
+header::after {
+    content: "";
+
+    position: absolute;
+
+    left: 8px;
+    right: 8px;
+
+    height: 3px;
+
+    background: var(--blood-red);
+}
+
+header::before {
+    top: 8px;
+}
+
+header::after {
+    bottom: 8px;
+}
+
 
 header h1 {
     margin: 0;
-    font-size: 36px;
+
+    color: var(--sunburst-yellow);
+
+    font-size: clamp(30px, 6vw, 56px);
+
+    font-weight: 900;
+
     letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        3px 3px 0 var(--ink),
+        5px 5px 0 var(--blood-red);
 }
+
 
 header h2 {
-    margin: 5px 0;
-    font-size: 24px;
-    letter-spacing: 5px;
+    margin: 4px 0 8px;
+
+    color: var(--skull-white);
+
+    font-size: clamp(20px, 4vw, 32px);
+
+    font-weight: 900;
+
+    letter-spacing: 8px;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        2px 2px 0 var(--ink);
 }
 
+
 header p {
-    margin-top: 10px;
-    font-size: 16px;
+    margin: 12px 0 0;
+
+    color: var(--bleached-bone);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+
     text-transform: uppercase;
 }
 
+
+/* -----------------------------------------
+   MAIN NAVIGATION
+   ----------------------------------------- */
+
 .menu {
-    display: flex;
-    gap: 15px;
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+
     margin-bottom: 30px;
 }
 
+
 button {
-    flex: 1;
-    padding: 18px;
-    background: #333;
-    border: 1px solid #888;
-    color: #e5e1d8;
-    font-size: 16px;
-    font-weight: bold;
+    position: relative;
+
+    padding: 18px 12px;
+
+    border: 3px solid var(--ink);
+
+    outline: 2px solid var(--paper-dark);
+
+    background: var(--blood-red);
+
+    color: var(--skull-white);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
     cursor: pointer;
+
+    box-shadow:
+        0 5px 0 var(--dark-red);
+
+    transition:
+        transform 0.08s ease,
+        box-shadow 0.08s ease,
+        filter 0.08s ease;
 }
+
 
 button:hover {
-    background: #444;
+    filter: brightness(1.15);
 }
 
+
+button:active {
+    transform: translateY(4px);
+
+    box-shadow:
+        0 1px 0 var(--dark-red);
+}
+
+
+/* -----------------------------------------
+   CONTENT / CODEX PANEL
+   ----------------------------------------- */
+
 #content {
-    border: 1px solid #555;
-    padding: 25px;
-    min-height: 250px;
-    background: #242424;
+    position: relative;
+
+    min-height: 280px;
+
+    padding: 35px;
+
+    background:
+        linear-gradient(
+            rgba(225, 212, 182, 0.96),
+            rgba(205, 193, 162, 0.96)
+        );
+
+    color: var(--ink);
+
+    border: 4px solid var(--ink);
+
+    outline: 3px solid var(--gold);
+
+    box-shadow:
+        0 0 0 7px var(--chaos-black),
+        0 10px 0 var(--deep-black);
+}
+
+
+/* Little "classified document" style corner */
+
+#content::before {
+    content: "CODEX IMPERIALIS";
+
+    position: absolute;
+
+    top: 10px;
+    right: 15px;
+
+    color: var(--dark-red);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+
+#content h2 {
+    margin-top: 0;
+
+    color: var(--blood-red);
+
+    font-size: 30px;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        1px 1px 0 var(--paper);
+}
+
+
+#content p {
+    font-size: 18px;
+
+    line-height: 1.6;
+}
+
+
+/* -----------------------------------------
+   RESPONSIVE DESIGN
+   ----------------------------------------- */
+
+@media (max-width: 650px) {
+
+    .app {
+        width: min(100% - 20px, 1000px);
+
+        padding-top: 20px;
+    }
+
+    header {
+        padding: 25px 12px 22px;
+    }
+
+    header h1 {
+        letter-spacing: 1px;
+    }
+
+    header h2 {
+        letter-spacing: 4px;
+    }
+
+    .menu {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+    }
+
+    button {
+        padding: 15px;
+    }
+
+    #content {
+        padding: 25px 20px;
+    }
 }
